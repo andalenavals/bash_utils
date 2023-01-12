@@ -1,0 +1,44 @@
+total 100
+-rw-r--r-- 1 jzuluaga users   682 2007-09-29 00:19 1-start.sh
+-rw-r--r-- 1 jzuluaga users  2001 2007-09-29 00:19 2-stdio.sh
+-rw-r--r-- 1 jzuluaga users  5303 2007-09-29 01:30 3-specialchar.sh
+-rw-r--r-- 1 root     root   5284 2007-09-29 00:20 3-specialchar.sh~
+-rw-r--r-- 1 jzuluaga users  2555 2007-09-29 00:20 4-variables_parte1.sh
+-rw-r--r-- 1 jzuluaga users  2043 2007-09-29 00:20 5-variables_parte2.sh
+-rw-r--r-- 1 jzuluaga users  4801 2007-09-29 00:20 6-condicionales.sh
+-rw-r--r-- 1 jzuluaga users  2735 2007-09-29 00:21 7-loops.sh
+-rw-r--r-- 1 jzuluaga users  1245 2007-09-29 00:21 8-rutinas.sh
+-rw-r--r-- 1 jzuluaga users  5113 2007-09-29 00:26 9-especiales.sh
+-rw-r--r-- 1 jzuluaga users  3515 2007-09-29 01:27 BASH-TUTORIAL.txt
+-rw-r--r-- 1 root     root    978 2007-09-29 01:16 CHANGESLOG
+-rw-r----- 1 root     root  17992 2007-09-29 01:08 COPYING
+drwxr-xr-x 2 jzuluaga users  4096 2007-09-29 00:26 ejemplos
+-rw-r--r-- 1 jzuluaga users  6060 2007-09-28 23:37 exercises.sh
+-rw-r--r-- 1 root     root      0 2007-09-29 01:31 trash.txt
+-rw-r--r-- 1 root     root    153 2007-09-29 01:10 VERSION
+  PID TTY          TIME CMD
+ 6282 pts/1    00:00:00 bash
+ 7836 pts/1    00:00:46 gnome-terminal
+ 7838 pts/1    00:00:00 gconfd-2
+ 7852 pts/1    00:00:00 gnome-pty-helpe
+18694 pts/1    00:00:02 emacs
+19177 pts/1    00:00:00 bash
+19198 pts/1    00:00:00 ps
+20715 pts/1    00:00:00 dbus-launch
+4	1-start.sh
+4	2-stdio.sh
+8	3-specialchar.sh
+8	3-specialchar.sh~
+4	4-variables_parte1.sh
+4	5-variables_parte2.sh
+8	6-condicionales.sh
+4	7-loops.sh
+4	8-rutinas.sh
+8	9-especiales.sh
+4	BASH-TUTORIAL.txt
+4	CHANGESLOG
+20	COPYING
+8	ejemplos
+8	exercises.sh
+4	trash.txt
+4	VERSION

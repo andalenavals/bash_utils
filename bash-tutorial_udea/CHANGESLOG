@@ -1,0 +1,37 @@
+#%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+#Tutorial de Bash
+#Por Jorge Zuluaga
+#Copyright (C) 2007 Jorge Zuluaga <zuluagajorge.at.gmail.com>
+#%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+......................................................................
+
+sáb sep 29 01:14:12 COT 2007
+
+- Cosas nuevas en la version 2:
+
+* Se colocaron en el mismo directorio todos los modulos
+
+* Se numeraron los modulos
+
+* Se eliminaron modulos incompletos
+
+* Se escribio una sencilla documentacion
+
+* Se cambio el comando exit separador de cada seccion de los modulos
+  por un mas amigable y manejable 'read ans'
+
+......................................................................
+
+sáb sep 29 01:14:12 COT 2007
+
+- Cosas esperadas en la proxima version (2.X o 3.0):
+
+* Mas ejemplos
+
+* Mas ejercicios
+
+* Solucionario a los ejercicios
+
+* Hacer una version del archivo introductorio mas amigable para otros
+  editores o para la web

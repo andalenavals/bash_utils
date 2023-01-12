@@ -1,0 +1,83 @@
+#%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+#Tutorial de Bash
+#Por Jorge Zuluaga
+#Copyright (C) 2007 Jorge Zuluaga <zuluagajorge.at.gmail.com>
+#%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+//////////////////////////////////////////////////////////////////////
+Presentacion
+//////////////////////////////////////////////////////////////////////
+
+Una de las cosas que mas me gusta como usuario de Linux es la
+posibilidad de automatizar de forma casi arbitraria las tareas que
+realizo con frecuencia como administrador o como usuario del sistema
+operativo a traves de los poderosos lenguajes de scripting con los que
+viene dotado.
+
+Por razones bastante naturales para quienes comenzamos a usar linux,
+bash es el primer lenguaje de scripting al que uno se ve enfrentado.
+Siendo bash (Bourne Shell) el mismisimo lenguaje con el que le
+hablamos al sistema operativo desde la consola, se vuelve este casi el
+lenguaje obligado para programar en Linux.  Son muchos los lenguajes
+con poderes mayores o menores que bash (csh, perl, awk, python, tcl,
+para citar algunos populares) pero desde mi opinion bash sigue siendo
+el mas importante por su omnipresencia y por la naturalidad con la que
+se puede hablar al sistema operativo.
+
+Este sencillo tutorial esta preparado para ensenar bash en un punado
+de lecciones que exploran sus aspectos centrales (y otros que no lo
+son tanto pero que son tan curiosos que como no mencionarlos) a traves
+de ejemplos en accion!
+
+Los archivos del tutorial mismo son scripts de bash que se pueden
+ejecutar paso a paso a medida que se van aprendiendo los distintos
+conceptos que se quieren ilustrar.
+
+Para utilizar mejor este tutorial ofrezco abajo algunos consejos
+utiles en la forma de un FAQ (Frecuently Asked Questions).  Aunque la
+verdad nadie me ha hecho ninguna pregunta sobre como debe o no
+utilizar el tutorial, el formato de FAQ me parecio muy apropiado para
+la espontaneidad de este documento.
+
+					Jorge I. Zuluaga C.
+					Septiembre de 2007
+
+//////////////////////////////////////////////////////////////////////
+FAQ
+//////////////////////////////////////////////////////////////////////
+
+......................................................................
+1) Como se lee (ejecuta) el tutorial?
+
+Para leer el tutorial te sugiero que abras una consola te ubiques
+sobre el directorio del tutorial y abras en cada leccion 2 archivos:
+el archivo del tutorial y un script de prueba que puedes usar para
+probar los comandos que vamos aprendiendo.
+
+Una vez abiertos en la consola lanzas el comando:
+
+    % bash n-modulo.sh
+
+Donde '%' denota el simbolo del sistema (no se escribe), 'n' es el
+numero del modulo y 'modulo' es el nombre del modulos.
+
+......................................................................
+2) En que orden debo leer el tutorial?
+
+El orden es arbitrario.  Sin embargo sugiero leer los modulos en el
+orden sugerido por el prefijo numerico antes del nombre "1-start.sh",
+"2-stdio.h" y asi sucesivamente.
+
+......................................................................
+3) Es necesario que realice los ejercicios propuestos en cada modulo?
+
+Naturalmente.  Para eso estan ahi.  Aun mas.  Sugiero que repitas
+muchos mas de los comandos incluidos en el tutorial y que juegues
+bastante con sus opciones
+
+......................................................................
+4) Puedo leer este tutorial en Windows o en la web?
+
+Si, pero no sirve de nada si no lo ejecutas y lo practicas
+inmediatamente.
+
