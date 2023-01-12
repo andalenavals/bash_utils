@@ -1,0 +1,22 @@
+#!/bin/bash
+START_PATH=/users/aanavarroa/original_gitrepos/TF_MomentsML_experiments/TF_scripts
+COMMAND=$START_PATH/TF_run_euclidlike.py
+
+WORK_PATH=/vol/euclidraid4/data/aanavarroa/trainings_eu_gems_feats/g1-grid-trucat-nw_10x10_hybrid
+WORK_PATH_2=/vol/euclidraid4/data/aanavarroa/trainings_eu_gems_feats/g2-grid-trucat-nw_10x10_hybrid
+
+POINT_MODEL_WEIGHTS1=$WORK_PATH/training/members/_bestmember/bestmember_weights.ckpt
+POINT_MODEL_WEIGHTS2=$WORK_PATH_2/training/members/_bestmember/bestmember_weights.ckpt
+G_NORMER=$WORK_PATH/training/normers/tp_input_ELLIP1_WINELLIP2_WINELLIP_AREAMAG_AUTOFLUX_RADIUSadamom_g1adamom_g2adamom_sigmaadamom_fluxadamom_rho4_normer.pkl
+
+G_CONFIG=$START_PATH/g_net2.cfg
+CATS_MOM=/vol/euclidraid4/data/aanavarroa/catalogs/MomentsML/fullimages_constimg_euclid
+G_CAT=$CATS_MOM/tp-constpsf/adamom_sexcat_nw_ss/groupcat.fits
+G_VCAT=$CATS_MOM/vp-constpsf/adamom_sexcat_nw_ss/groupcat.fits
+G_FEATURES=("ELLIP1_WIN" "ELLIP2_WIN" "ELLIP_AREA" "MAG_AUTO" "FLUX_RADIUS" "adamom_g1" "adamom_g2" "adamom_sigma" "adamom_flux" "adamom_rho4")
+EPOCHS=100000
+FINE_EPOCHS=10000
+LEARNING_RATE=0.01
+
+python $COMMAND  --workdir=$WORK_PATH --g_config=$G_CONFIG --g_features ${G_FEATURES[@]} --g_cat=$G_CAT --g_vcat=$G_VCAT --epochs=$EPOCHS --fine_epochs=$FINE_EPOCHS --learning_rate=$LEARNING_RATE --validate_g --train_g --finetune #--train_g --finetune #--validate_g  --totalval --g_model_weights=$POINT_MODEL_WEIGHTS1 --g_model_weights2=$POINT_MODEL_WEIGHTS2 --g_normer=$G_NORMER 
+ 

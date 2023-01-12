@@ -1,0 +1,35 @@
+#!/bin/bash
+START_PATH=/users/aanavarroa/original_gitrepos/TF_MomentsML_experiments/TF_scripts
+COMMAND=$START_PATH/TF_run_euclidlike.py
+
+TRAINING_MOM=/vol/euclidraid4/data/aanavarroa/trainings_eu/
+WORK_PATH=$TRAINING_MOM/tw1-grid-trucat-nw-net5_w01
+WORK_PATH_2=$TRAINING_MOM/tw2-grid-trucat-nw-net5_w01
+WEIGHT_MODEL_WEIGHTS2=$WORK_PATH_2/training/members/_bestmember/bestmember_weights.ckpt
+WEIGHT_MODEL_WEIGHTS1=$WORK_PATH/training/members/_bestmember/bestmember_weights.ckpt
+
+POINT_MODEL_CONFIG=$TRAINING_MOM/g1-grid-trucat-nw/training/members/_bestmember/bestmember.cfg
+POINT_MODEL_WEIGHTS=$TRAINING_MOM/g1-grid-trucat-nw/training/members/_bestmember/bestmember_weights.ckpt
+POINT_MODEL_WEIGHTS2=$TRAINING_MOM/g2-grid-trucat-nw/training/members/_bestmember/bestmember_weights.ckpt
+POINT_MODEL_WEIGHTS1=$TRAINING_MOM/g1-grid-trucat-nw/training/members/_bestmember/bestmember_weights.ckpt
+
+G_NORMER=$TRAINING_MOM/g1-grid-trucat-nw/training/normers/tp_input_adamom_g1adamom_g2adamom_sigmaadamom_fluxadamom_rho4_normer.pkl
+G_CONFIG=$START_PATH/g1.cfg
+G_FEATURES=("adamom_g1" "adamom_g2" "adamom_sigma" "adamom_flux" "adamom_rho4")
+
+
+W_CONFIG=$START_PATH/w1.cfg
+CATS_MOM=/vol/euclidraid4/data/aanavarroa/catalogs/MomentsML/fullimages_constimg_euclid/
+W_CAT=$CATS_MOM/tw-constpsf-grid-big/adamom_trucat_nw/groupcat.fits
+#W_VCAT=$CATS_MOM/tw-constpsf-grid-big/adamom_trucat_nw/groupcat.fits
+#W_VCAT=$CATS_MOM/vo-constpsf-grid-big/adamom_trucat_nw/groupcat.fits
+#W_VCAT=$CATS_MOM/vo-constpsf-grid-big/adamom_trucat_nw/groupcat_matchpairs.fits
+W_VCAT=$CATS_MOM/vo-constpsf-grid-big/adamom_sexcat_nw/groupcat_matchpairs.fits
+#W_VCAT=$CATS_MOM/vo-constpsf-grid-big-test/adamom_sexcat_nw/groupcat_matchpairs.fits
+W_FEATURES=("adamom_g1" "adamom_g2" "adamom_sigma" "adamom_flux" "adamom_rho4")
+EPOCHS=100
+FINE_EPOCHS=10000
+LEARNING_RATE=0.01
+
+python $COMMAND  --workdir=$WORK_PATH --g_config=$G_CONFIG --w_config=$W_CONFIG --g_features ${G_FEATURES[@]} --w_features ${W_FEATURES[@]} --w_cat=$W_CAT --w_vcat=$W_VCAT  --g_model_config=$POINT_MODEL_CONFIG --g_model_weights=$POINT_MODEL_WEIGHTS --g_normer=$G_NORMER --epochs=$EPOCHS --fine_epochs=$FINE_EPOCHS --learning_rate=$LEARNING_RATE --validate_w --train_w --finetune  #--totalval  --g_model_weights1=$POINT_MODEL_WEIGHTS1 --g_model_weights2=$POINT_MODEL_WEIGHTS2 --w_model_weights1=$WEIGHT_MODEL_WEIGHTS1 --w_model_weights2=$WEIGHT_MODEL_WEIGHTS2  #--train_w --finetune 
+ 

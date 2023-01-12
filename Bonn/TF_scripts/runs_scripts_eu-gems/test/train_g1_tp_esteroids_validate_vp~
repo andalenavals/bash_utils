@@ -1,0 +1,22 @@
+#!/bin/bash
+START_PATH=/users/aanavarroa/original_gitrepos/TF_MomentsML_experiments/TF_scripts
+COMMAND=$START_PATH/TF_run_euclidlike.py
+
+WORK_PATH=/vol/euclidraid4/data/aanavarroa/trainings_eu_gems_feats/g1-grid-trucat-nw_10x10_sexteroid
+WORK_PATH_2=/vol/euclidraid4/data/aanavarroa/trainings_eu_gems_feats/g2-grid-trucat-nw_10x10_sexteroid
+
+POINT_MODEL_WEIGHTS1=$WORK_PATH/training/members/_bestmember/bestmember_weights.ckpt
+POINT_MODEL_WEIGHTS2=$WORK_PATH_2/training/members/_bestmember/bestmember_weights.ckpt
+G_NORMER=$WORK_PATH/training/normers/tp.pkl
+
+G_CONFIG=$START_PATH/g_net2.cfg
+CATS_MOM=/vol/euclidraid4/data/aanavarroa/catalogs/MomentsML/fullimages_constimg_euclid
+G_CAT=$CATS_MOM/tp-constpsf/adamom_sexcat_nw_ss/groupcat.fits
+G_VCAT=$CATS_MOM/vp-constpsf/adamom_sexcat_nw_ss/groupcat.fits
+G_FEATURES=("ELLIP1_WIN" "ELLIP2_WIN" "AWIN_IMAGE" "BWIN_IMAGE" "MAG_AUTO" "FLUX_RADIUS" "CXXWIN_IMAGE" "CYYWIN_IMAGE" "CXYWIN_IMAGE" "ERRTHETAWIN_IMAGE" "ERRAWIN_IMAGE" "ERRBWIN_IMAGE")
+EPOCHS=100000
+FINE_EPOCHS=10000
+LEARNING_RATE=0.01
+
+python $COMMAND  --workdir=$WORK_PATH --g_config=$G_CONFIG --g_features ${G_FEATURES[@]} --g_cat=$G_CAT --g_vcat=$G_VCAT --epochs=$EPOCHS --fine_epochs=$FINE_EPOCHS --learning_rate=$LEARNING_RATE --validate_g --train_g --finetune #--train_g --finetune #--validate_g  --totalval --g_model_weights=$POINT_MODEL_WEIGHTS1 --g_model_weights2=$POINT_MODEL_WEIGHTS2 --g_normer=$G_NORMER 
+ 

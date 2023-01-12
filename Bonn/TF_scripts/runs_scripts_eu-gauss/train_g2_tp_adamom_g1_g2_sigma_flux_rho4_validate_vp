@@ -1,0 +1,18 @@
+#!/bin/bash
+
+START_PATH=/users/aanavarroa/original_gitrepos/TF_MomentsML_experiments/TF_scripts
+COMMAND=$START_PATH/TF_run_euclidlike.py
+
+WORK_PATH=/vol/euclid9/euclid9_3/aanavarroa/trainings_eu-gauss/g2-grid-trucat
+
+G_CONFIG=/users/aanavarroa/original_gitrepos/TF_MomentsML_experiments/TF_scripts/g2.cfg
+CATS_MOM=/vol/euclid2/euclid2_raid2/aanavarroa/catalogs/MomentsML/fullimages_constimg_euclid-gauss
+G_CAT=$CATS_MOM/tp/adamom_trucat_nw/groupcat.fits
+G_VCAT=$CATS_MOM/vp/adamom_trucat_nw/groupcat.fits
+G_FEATURES=("adamom_g1" "adamom_g2" "adamom_sigma" "adamom_flux" "adamom_rho4")
+EPOCHS=100000
+FINE_EPOCHS=5000
+LEARNING_RATE=0.1
+
+python $COMMAND  --workdir=$WORK_PATH --g_config=$G_CONFIG --g_features ${G_FEATURES[@]} --g_cat=$G_CAT --g_vcat=$G_VCAT --epochs=$EPOCHS --fine_epochs=$FINE_EPOCHS --learning_rate=$LEARNING_RATE  --validate_g --comp=2  #--train_g --finetune
+ 

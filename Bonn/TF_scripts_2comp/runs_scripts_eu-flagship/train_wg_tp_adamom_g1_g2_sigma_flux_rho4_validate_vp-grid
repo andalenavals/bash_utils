@@ -1,0 +1,22 @@
+#!/bin/bash
+
+START_PATH=/users/aanavarroa/original_gitrepos/TF_MomentsML_experiments/TF_scripts_2comp
+COMMAND=$START_PATH/TF_run_euclidlike_2comp.py
+
+WORK_PATH=/vol/euclidraid4/data/aanavarroa/trainings_eu_2comp-flagship/wg-grid-trucat-nw-ss_10nodes
+
+WG_CONFIG=$START_PATH/wg_10x10.cfg
+CATS_MOM=/vol/euclidraid4/data/aanavarroa/catalogs/MomentsML/fullimages_constimg_euclid-flagship
+WG_CAT=$CATS_MOM/tp-bulgedisk-constpsf-constback-grid/adamom_trucat_nw_ss/groupcat.fits
+WG_VCAT=$CATS_MOM/vp-bulgedisk-constpsf-constback-grid/adamom_trucat_nw_ss/groupcat.fits
+WG_FEATURES=("adamom_g1" "adamom_g2" "adamom_sigma" "adamom_flux" "adamom_rho4")
+TARGETS=("tru_s1")
+EPOCHS=1000
+FINE_EPOCHS=1000
+LEARNING_RATE=0.1
+
+cd $START_PATH
+
+python $COMMAND  --workdir=$WORK_PATH --wg_config=$WG_CONFIG --wg_features ${WG_FEATURES[@]} --targets ${TARGETS[@]} --wg_cat=$WG_CAT --wg_vcat=$WG_VCAT --epochs=$EPOCHS --fine_epochs=$FINE_EPOCHS --learning_rate=$LEARNING_RATE --tru_type=2 --validate_wg #--train_wg --finetune --use_val --nbatch=10
+
+

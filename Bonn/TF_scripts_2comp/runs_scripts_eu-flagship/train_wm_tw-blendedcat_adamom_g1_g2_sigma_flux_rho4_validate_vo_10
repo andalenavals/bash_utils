@@ -1,0 +1,31 @@
+#!/bin/bash
+
+START_PATH=/users/aanavarroa/original_gitrepos/TF_MomentsML_experiments/TF_scripts_2comp
+COMMAND=$START_PATH/TF_run_euclidlike_2comp.py
+
+TRAINING_MOM=/vol/euclidraid4/data/aanavarroa/trainings_eu_2comp-flagship/
+WORK_PATH=$TRAINING_MOM/wm-blended-sexcat-constpsf-constback-vardensity-nw-ss_10nodes
+
+GDIR=/g-grid-trucat-nw-ss_10nodes_skymad/training/
+POINT_MODEL_CONFIG=$TRAINING_MOM/$GDIR/members/_bestmember/bestmember.cfg
+POINT_MODEL_WEIGHTS=$TRAINING_MOM/$GDIR/members/_bestmember/bestmember_weights.ckpt
+G_NORMER=$TRAINING_MOM/$GDIR/normers/tp_input_adamom_g1adamom_g2adamom_sigmaadamom_fluxadamom_rho4skymad_normer.pkl
+G_CONFIG=$START_PATH/g.cfg
+G_FEATURES=("adamom_g1" "adamom_g2" "adamom_sigma" "adamom_flux" "adamom_rho4" "skymad")
+TARGETS=("tru_s1" "tru_s2")
+
+WM_CONFIG=$START_PATH/wm_15x15_5x5.cfg
+CATS_MOM=/vol/euclidraid4/data/aanavarroa/catalogs/MomentsML/fullimages_constimg_euclid-flagship/
+G_CAT=$CATS_MOM/tp-bulgedisk-constpsf-constback-grid/adamom_trucat_nw_ss/groupcat.fits
+WM_CAT=$CATS_MOM/tw-bulgedisk-constpsf-constback-blended-vardensity-big/adamom_sexcat_w_20_ss/groupcat.fits
+WM_VCAT=$CATS_MOM/tw-bulgedisk-constpsf-constback-blended-vardensity-big/adamom_sexcat_w_20_ss/groupcat.fits
+W_FEATURES=("adamom_g1" "adamom_g2" "adamom_sigma" "adamom_flux" "adamom_rho4" "skymad")
+M_FEATURES=("fracpix_md")
+EPOCHS=1000
+FINE_EPOCHS=1000
+LEARNING_RATE=0.1
+
+cd $START_PATH
+
+python $COMMAND  --workdir=$WORK_PATH --g_config=$G_CONFIG --wm_config=$WM_CONFIG --g_features ${G_FEATURES[@]} --w_features ${W_FEATURES[@]} --targets ${TARGETS[@]} --m_features ${M_FEATURES[@]} --g_cat=$G_CAT --wm_cat=$WM_CAT --wm_vcat=$WM_VCAT  --g_model_config=$POINT_MODEL_CONFIG --g_model_weights=$POINT_MODEL_WEIGHTS --g_normer=$G_NORMER --epochs=$EPOCHS --fine_epochs=$FINE_EPOCHS --learning_rate=$LEARNING_RATE  --validate_wm #--train_wm --nbatch=10 --use_val --blendsel --finetune  #--use_val
+ 

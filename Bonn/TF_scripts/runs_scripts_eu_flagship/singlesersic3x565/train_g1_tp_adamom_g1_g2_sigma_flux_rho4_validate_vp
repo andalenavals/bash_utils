@@ -1,0 +1,23 @@
+#!/bin/bash
+
+START_PATH=/users/aanavarroa/original_gitrepos/TF_MomentsML_experiments/TF_scripts
+COMMAND=$START_PATH/TF_run_euclidlike.py
+
+WORK_PATH=/vol/euclidraid4/data/aanavarroa/trainings_eu_flagship_sersic_3expt/g1-grid-trucat-nw-ss
+WORK_PATH_2=/vol/euclidraid4/data/aanavarroa/trainings_eu_flagship_sersic_3expt/g2-grid-trucat-nw-ss
+
+POINT_MODEL_WEIGHTS1=$WORK_PATH/training/members/_bestmember/bestmember_weights.ckpt
+POINT_MODEL_WEIGHTS2=$WORK_PATH_2/training/members/_bestmember/bestmember_weights.ckpt
+G_NORMER=$WORK_PATH/training/normers/tp_input_adamom_g1adamom_g2adamom_sigmaadamom_fluxadamom_rho4_normer.pkl
+
+G_CONFIG=$START_PATH/g.cfg
+CATS_MOM=/vol/euclidraid4/data/aanavarroa/catalogs/MomentsML/fullimages_constimg_euclid-flagship
+G_CAT=$CATS_MOM/tp-sersic-constpsf-constback-grid_3expt/adamom_trucat_nw_ss/groupcat.fits
+G_VCAT=$CATS_MOM/vp-sersic-constpsf-constback-grid_3expt/adamom_trucat_nw_ss/groupcat.fits
+G_FEATURES=("adamom_g1" "adamom_g2" "adamom_sigma" "adamom_flux" "adamom_rho4")
+EPOCHS=100000
+FINE_EPOCHS=10000
+LEARNING_RATE=0.01
+
+python $COMMAND  --workdir=$WORK_PATH --g_config=$G_CONFIG --g_features ${G_FEATURES[@]} --g_cat=$G_CAT --g_vcat=$G_VCAT --epochs=$EPOCHS --fine_epochs=$FINE_EPOCHS --learning_rate=$LEARNING_RATE --snrcut=10 --tru_type=2 --validate_g #--train_g --finetune #--train_g --finetune #--validate_g  --totalval --g_model_weights=$POINT_MODEL_WEIGHTS1 --g_model_weights2=$POINT_MODEL_WEIGHTS2 --g_normer=$G_NORMER 
+ 

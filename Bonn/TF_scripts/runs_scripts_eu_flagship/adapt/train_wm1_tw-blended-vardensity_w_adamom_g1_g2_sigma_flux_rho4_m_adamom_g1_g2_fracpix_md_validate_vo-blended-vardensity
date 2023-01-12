@@ -1,0 +1,34 @@
+#!/bin/bash
+
+START_PATH=/users/aanavarroa/original_gitrepos/TF_MomentsML_experiments/TF_scripts
+COMMAND=$START_PATH/TF_run_euclidlike.py
+
+TRAINING_MOM=/vol/euclidraid4/data/aanavarroa/trainings_eu/
+
+WORK_PATH=$TRAINING_MOM/wm1_constpsf_vardensity-w_g12_s_f_r4-m_g12_frac
+WORK_PATH_2=$TRAINING_MOM/wm2_constpsf_vardensity-w_g12_s_f_r4-m_g12_frac
+
+WEIGHT_MODEL_WEIGHTS2=$WORK_PATH_2/training/members/_bestmember/bestmember_weights.ckpt
+WEIGHT_MODEL_WEIGHTS1=$WORK_PATH/training/members/_bestmember/bestmember_weights.ckpt
+
+POINT_MODEL_CONFIG=$TRAINING_MOM/g1-grid-trucat-nw/training/members/_bestmember/bestmember.cfg
+POINT_MODEL_WEIGHTS=$TRAINING_MOM/g1-grid-trucat-nw/training/members/_bestmember/bestmember_weights.ckpt
+POINT_MODEL_WEIGHTS2=$TRAINING_MOM/g2-grid-trucat-nw/training/members/_bestmember/bestmember_weights.ckpt
+POINT_MODEL_WEIGHTS1=$TRAINING_MOM/g1-grid-trucat-nw/training/members/_bestmember/bestmember_weights.ckpt
+
+G_NORMER=$TRAINING_MOM/g1-grid-trucat-nw/training/normers/tp_input_adamom_g1adamom_g2adamom_sigmaadamom_fluxadamom_rho4_normer.pkl
+G_CONFIG=$START_PATH/g1.cfg
+G_FEATURES=("adamom_g1" "adamom_g2" "adamom_sigma" "adamom_flux" "adamom_rho4")
+
+
+WM_CONFIG=$START_PATH/wm1.cfg
+CATS_MOM=/vol/euclidraid4/data/aanavarroa/catalogs/MomentsML/fullimages_constimg_euclid/
+WM_CAT=$CATS_MOM/tw-constpsf-blended-vardensity-big/adamom_sexcat_w/groupcat.pkl
+WM_VCAT=$CATS_MOM/vo-constpsf-blended-vardensity-big/adamom_sexcat_w/groupcat.pkl
+W_FEATURES=("adamom_g1" "adamom_g2" "adamom_sigma" "adamom_flux" "adamom_rho4")
+M_FEATURES=("adamom_g1" "adamom_g2" "fracpix_md")
+EPOCHS=1000
+FINE_EPOCHS=10000
+LEARNING_RATE=0.01
+
+python $COMMAND  --workdir=$WORK_PATH --g_config=$G_CONFIG --wm_config=$WM_CONFIG --g_features ${G_FEATURES[@]} --w_features ${W_FEATURES[@]} --m_features ${M_FEATURES[@]} --wm_cat=$WM_CAT --wm_vcat=$WM_VCAT  --g_model_config=$POINT_MODEL_CONFIG --g_model_weights=$POINT_MODEL_WEIGHTS --epochs=$EPOCHS --fine_epochs=$FINE_EPOCHS --learning_rate=$LEARNING_RATE --g_normer=$G_NORMER --train_wm --finetune --validate_wm #--totalval  --g_model_weights1=$POINT_MODEL_WEIGHTS1 --g_model_weights2=$POINT_MODEL_WEIGHTS2 --w_model_weights1=$WEIGHT_MODEL_WEIGHTS1 --w_model_weights2=$WEIGHT_MODEL_WEIGHTS2 

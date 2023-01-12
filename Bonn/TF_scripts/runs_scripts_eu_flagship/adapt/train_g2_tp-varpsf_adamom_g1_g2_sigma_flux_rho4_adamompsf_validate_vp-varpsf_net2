@@ -1,0 +1,25 @@
+#!/bin/bash
+
+START_PATH=/users/aanavarroa/original_gitrepos/TF_MomentsML_experiments/TF_scripts
+COMMAND=$START_PATH/TF_run_euclidlike.py
+
+WORK_PATH=/vol/euclid5/euclid5_raid3/aanavarroa/trainings_eu/g2-varpsf-grid-trucat-nw-adamompsf-net10
+WORK_PATH_1=/vol/euclid5/euclid5_raid3/aanavarroa/trainings_eu/tp-varpsf-grid-trucat-nw-adamompsf-net10
+
+
+POINT_MODEL_WEIGHTS2=$WORK_PATH/training/members/_bestmember/bestmember_weights.ckpt
+POINT_MODEL_WEIGHTS1=$WORK_PATH_1/training/members/_bestmember/bestmember_weights.ckpt
+G_NORMER=$WORK_PATH/training/normers/tp_input_adamom_g1adamom_g2adamom_sigmaadamom_fluxadamom_rho4psf_adamom_g1psf_adamom_g2psf_adamom_sigmapsf_adamom_rho4_normer.pkl
+G_NORMER_1=$WORK_PATH_1/training/normers/tp_input_adamom_g1adamom_g2adamom_sigmaadamom_fluxadamom_rho4psf_adamom_g1psf_adamom_g2psf_adamom_sigmapsf_adamom_rho4_normer.pkl
+
+G_CONFIG=$START_PATH/g2_net2.cfg
+CATS_MOM=/vol/euclid9/euclid9_2/aanavarroa/catalogs/MomentsML/fullimages_constimg_euclid
+G_CAT=$CATS_MOM/tp-varpsf/adamom_trucat_nw/groupcat.fits
+G_VCAT=$CATS_MOM/vp-varpsf/adamom_trucat_nw/groupcat.fits
+G_FEATURES=("adamom_g1" "adamom_g2" "adamom_sigma" "adamom_flux" "adamom_rho4" "psf_adamom_g1" "psf_adamom_g2" "psf_adamom_sigma" "psf_adamom_rho4")
+EPOCHS=100
+FINE_EPOCHS=5000
+LEARNING_RATE=0.1
+
+python $COMMAND  --workdir=$WORK_PATH --g_config=$G_CONFIG  --g_features ${G_FEATURES[@]} --g_cat=$G_CAT --g_vcat=$G_VCAT --epochs=$EPOCHS --fine_epochs=$FINE_EPOCHS --learning_rate=$LEARNING_RATE  --validate_g --comp=2  --totalval --g_model_weights1=$POINT_MODEL_WEIGHTS1 --g_model_weights2=$POINT_MODEL_WEIGHTS2 --g_normer1=$G_NORMER --g_normer2=$G_NORMER #--train_g --finetune
+ 

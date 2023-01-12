@@ -1,0 +1,27 @@
+#!/bin/bash
+
+START_PATH=/users/aanavarroa/original_gitrepos/TF_MomentsML_experiments/TF_scripts_2comp
+COMMAND=$START_PATH/TF_run_euclidlike_2comp.py
+
+TRAINING_MOM=/vol/euclidraid4/data/aanavarroa/trainings_eu/
+WORK_PATH=$TRAINING_MOM/fullconected_wm_constpsf_vardensity-fracpixmd
+POINT_MODEL_CONFIG=$TRAINING_MOM/g1-grid-trucat-nw/training/members/_bestmember/bestmember.cfg
+POINT_MODEL_WEIGHTS=$TRAINING_MOM/g1-grid-trucat-nw/training/members/_bestmember/bestmember_weights.ckpt
+G_NORMER=$TRAINING_MOM/g1-grid-trucat-nw/training/normers/tp_input_adamom_g1adamom_g2adamom_sigmaadamom_fluxadamom_rho4_normer.pkl
+G_CONFIG=$START_PATH/g.cfg
+G_FEATURES=("adamom_g1" "adamom_g2" "adamom_sigma" "adamom_flux" "adamom_rho4")
+TARGETS=("tru_s1")
+
+
+WM_CONFIG=$START_PATH/wm_10x10_fullconnected.cfg
+CATS_MOM=/vol/euclidraid4/data/aanavarroa/catalogs/MomentsML/fullimages_constimg_euclid
+
+WM_CAT=$CATS_MOM/tw-constpsf-blended-vardensity-big/adamom_sexcat_w/groupcat.pkl
+WM_VCAT=$CATS_MOM/vo-constpsf-blended-vardensity-big/adamom_sexcat_w/groupcat.pkl
+WM_FEATURES=("adamom_g1" "adamom_g2" "adamom_sigma" "adamom_flux" "adamom_rho4" "fracpix_md")
+EPOCHS=10000
+FINE_EPOCHS=1000
+LEARNING_RATE=0.01
+
+python $COMMAND  --workdir=$WORK_PATH --g_config=$G_CONFIG --wm_fc_config=$WM_CONFIG --g_features ${G_FEATURES[@]} --wm_fc_features ${WM_FEATURES[@]} --targets ${TARGETS[@]} --wm_cat=$WM_CAT --wm_vcat=$WM_VCAT  --g_model_config=$POINT_MODEL_CONFIG --g_model_weights=$POINT_MODEL_WEIGHTS --g_normer=$G_NORMER --epochs=$EPOCHS --fine_epochs=$FINE_EPOCHS --learning_rate=$LEARNING_RATE --validate_wm_fc #--train_wm_fc 
+
